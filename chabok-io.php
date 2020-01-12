@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Chabok Integration
- * Version: 0.12.21-alpha
+ * Version: 0.01.13-alpha
  * Author: Chabok
  * Description: This plugin provides Chabok integration features such as Push notifications and tracking tags.
  * Plugin URI: https://chabok.io/
@@ -121,7 +121,16 @@ final class ChabokIO {
 	 * @access private
 	 * @return void
 	 */
-	private function includes() {}
+	private function includes() {
+		global $chabok_options;
+
+		require_once CHABOK_DIR . 'includes/register-settings.php';
+		$chabok_options = chabok_get_options();
+
+		require_once CHABOK_DIR . 'includes/meta-box.php';
+		require_once CHABOK_DIR . 'includes/enqueues.php';
+
+	}
 
 	/**
 	 * Loads the plugin language files.
