@@ -15,17 +15,9 @@ function chabok_enqueue() {
 	global $chabok_options;
 
 	wp_register_script(
-		'chabok-workersdk',
-		CHABOK_URL . 'assets/js/ChabokSDKWorker.js',
-		array(),
-		CHABOK_VER,
-		true
-	);
-
-	wp_register_script(
 		'chabokpush',
 		CHABOK_URL . 'assets/js/chabokpush.min.js',
-		array( 'chabok-workersdk' ),
+		array(),
 		CHABOK_VER,
 		true
 	);
@@ -40,6 +32,9 @@ function chabok_enqueue() {
 
 	wp_enqueue_script( 'chabok' );
 
-	wp_localize_script( 'chabok', 'chabok_options', $chabok_options );
+	wp_localize_script( 'chabok', 'chabok_params', array(
+		'options' 		=> $chabok_options,
+		'worker'		=> CHABOK_URL . 'assets/js/ChabokSDKWorker.js',
+	) );
 }
 add_action( 'wp_enqueue_scripts', 'chabok_enqueue' );

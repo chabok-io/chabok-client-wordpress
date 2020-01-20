@@ -44,6 +44,7 @@ function chabok_get_options() {
 			'webpush'			=> 'off',
 			'vapid'				=> '',
 			'env'				=> 'dev',
+			'realtime'			=> 'off',
 			'welcome_enabled'	=> 'off',
 			'welcome_message'	=> '',
 		) );
@@ -83,13 +84,15 @@ function chabok_register_options() {
 				'chabok_options_' . $tab,
 				'chabok_options_' . $tab,
 				array(
-					'id'		=> isset( $option['id'] ) ? $option['id'] : null,
-					'desc'		=> ! empty( $option['desc'] ) ? $option['desc'] : '',
-					'name'		=> isset( $option['name'] ) ? $option['name'] : '',
-					'section'	=> $tab,
-					'size'		=> isset( $option['size'] ) ? $option['size'] : null,
-					'options'	=> isset( $option['options'] ) ? $option['options'] : [],
-					'std'		=> isset( $option['std'] ) ? $option['std'] : null,
+					'id'			=> isset( $option['id'] ) ? $option['id'] : null,
+					'desc'			=> ! empty( $option['desc'] ) ? $option['desc'] : '',
+					'name'			=> isset( $option['name'] ) ? $option['name'] : '',
+					'section'		=> $tab,
+					'size'			=> isset( $option['size'] ) ? $option['size'] : null,
+					'options'		=> isset( $option['options'] ) ? $option['options'] : [],
+					'std'			=> isset( $option['std'] ) ? $option['std'] : null,
+					'input_class'	=> isset( $option['input_class'] ) ? $option['input_class'] : '',
+					'multiple'		=> ( isset( $option['multiple'] ) && $option['multiple'] ),
 				)
 			);
 
@@ -106,9 +109,26 @@ add_action( 'admin_init', 'chabok_register_options' );
  */
 function chabok_get_tabs() {
 	return array(
-		'core'		=> sprintf( __( '%s Parameters', 'chabok-io' ), '<span class="dashicons dashicons-feedback"></span>' ),
-		'tracker'	=> sprintf( __( '%s Tracker', 'chabok-io' ), '<span class="dashicons dashicons-chart-pie"></span>' ),
-		'welcome'	=> sprintf( __( '%s Welcome message', 'chabok-io' ), '<span class="dashicons dashicons-share-alt"></span>' ),
+		'core'			=> sprintf( __( '%s Parameters', 'chabok-io' ), '<span class="dashicons dashicons-feedback"></span>' ),
+		'attribution'	=> sprintf( __( '%s Attribution', 'chabok-io' ), '<span class="dashicons dashicons-admin-users"></span>' ),
+		'tracking'		=> sprintf( __( '%s Tracking', 'chabok-io' ), '<span class="dashicons dashicons-chart-pie"></span>' ),
+		'advanced'		=> sprintf( __( '%s Advanced', 'chabok-io' ), '<span class="dashicons dashicons-admin-tools"></span>' ),
+	);
+}
+
+/**
+ * Gets the available keys for user ID assigning.
+ *
+ * @return array
+ */
+function chabok_get_user_attribute_keys() {
+	return apply_filters(
+		'chabok_user_id_keys',
+		array(
+			'ID' => 'ID',
+			'user_login' => __( 'Username', 'chabok-io' ),
+			'email' => __( 'Email', 'chabok-io' ),
+		)
 	);
 }
 
@@ -118,7 +138,7 @@ function chabok_get_tabs() {
  * @param               array $input Options input
  * @return              array Sanitized options to be saved
  */
-function chabok_settings_sanitize( $input = array() ) {
+function chabok_options_sanitize( $input = array() ) {
 	global $chabok_options;
 
 	if ( empty( $_POST['_wp_http_referer'] ) ) {
@@ -178,7 +198,7 @@ function chabok_settings_sanitize( $input = array() ) {
 	global $chabok_options;
 	$chabok_options = $output;
 
-	add_settings_error( 'chabok-notices', '', __( 'Settings updated.', 'chabok-io' ), 'updated' );
+	add_settings_error( 'chabok_options', '', __( 'Settings updated.', 'chabok-io' ), 'updated' );
 	return $output;
 
 }
@@ -196,13 +216,15 @@ function chabok_get_registered_options() {
 				'name'			=> __( 'App ID', 'chabok-io' ),
 				'type'			=> 'text',
 				'std'			=> '',
+				'input_class'	=> 'code',
 			),
 			'web_key'			=> array(
 				'id'			=> 'web_key',
 				'name'			=> __( 'Web Key', 'chabok-io' ),
 				'type'			=> 'text',
 				'std'			=> '',
-				'desc'			=> sprintf( __( 'You can receive App ID and Web Key in <a href="%s">your Chabok panel</a>', 'chabok-io' ), 'https://chabok.io' ),
+				'desc'			=> sprintf( __( 'You can receive App ID and Web Key in <a href="%s">your Chabok panel</a>.', 'chabok-io' ), 'https://chabok.io' ),
+				'input_class'	=> 'code',
 			),
 			'webpush'			=> array(
 				'id'			=> 'webpush',
@@ -221,6 +243,7 @@ function chabok_get_registered_options() {
 				'type'			=> 'text',
 				'std'			=> '',
 				'desc'			=> sprintf( __( 'VAPID public key is required when you want to use WebPush. You can receive VAPID public key in <a href="%s">your Chabok panel</a>', 'chabok-io' ), 'https://chabok.io' ),
+				'input_class'	=> 'code',
 			),
 			'env'				=> array(
 				'id'			=> 'env',
@@ -233,8 +256,19 @@ function chabok_get_registered_options() {
 				),
 				'desc'			=> __( 'Check the "Production" option when you are ready to blast off.', 'chabok-io' )
 			),
+			'realtime'			=> array(
+				'id'			=> 'realtime',
+				'name'			=> __( 'Real-time usage', 'chabok-io' ),
+				'type'			=> 'radio',
+				'std'			=> 'off',
+				'options'		=> array(
+					'on'		=> __( 'On', 'chabok-io' ),
+					'off'		=> __( 'Off', 'chabok-io' ),
+				),
+				'desc'			=> __( "If it's on, users' online status and activity will be shown on your Chabok panel as soon as it happens.", 'chabok-io' ),
+			),
 		) ),
-		'tracker'				=> apply_filters( 'chabok_tracker_options', array(
+		'attribution'			=> apply_filters( 'chabok_tracking_options', array(
 			'register_users'	=> array(
 				'id'			=> 'register_users',
 				'name'			=> __( 'Register logged-in users', 'chabok-io' ),
@@ -246,24 +280,31 @@ function chabok_get_registered_options() {
 				'std'			=> 'off',
 				'desc'			=> __( 'Turn this on if you want logged-in users to be registered and tracked by Chabok.', 'chabok-io' ),
 			),
+			'user_id_key'		=> array(
+				'id'			=> 'user_id_key',
+				'name'			=> __( 'User attribution key', 'chabok-io' ),
+				'type'			=> 'select',
+				'options'		=> chabok_get_user_attribute_keys(),
+				'std'			=> 'email',
+				'desc'			=> __( 'Choose which one of the user attributes should be used for his/her attribution in Chabok.', 'chabok-io' ),
+			),
 		) ),
-		'welcome'				=> apply_filters( 'chabok_welcome_options', array(
-			'welcome_enabled'	=> array(
-				'id'			=> 'welcome_enabled',
-				'name'			=> __( 'Welcome prompt', 'chabok-io' ),
+		'advanced'				=> apply_filters( 'chabok_advanced_options', array(
+			'rewrite_sw'		=> array(
+				'id'			=> 'rewrite_sw',
+				'name'			=> __( 'Rewrite ServiceWorker', 'chabok-io' ),
 				'type'			=> 'radio',
 				'options'		=> array(
 					'on'		=> __( 'On', 'chabok-io' ),
 					'off'		=> __( 'Off', 'chabok-io' ),
 				),
-				'std'			=> 'off',
-				'desc'			=> __( 'You can set whether you\'d like a welcome prompt being shown to your website visitors.', 'chabok-io' ),
+				'std'			=> 'on',
+				'desc'			=> sprintf( __( 'Turn this option off if you use your web server to rewrite ServiceWorker.js file on your website root. <a href="%s">Learn more</a>', 'chabok-io' ), '#' ),
 			),
-			'welcome_message'	=> array(
-				'id'			=> 'welcome_message',
-				'name'			=> __( 'Welcome message', 'chabok-io' ),
-				'type'			=> 'text',
-				'desc'			=> __( 'The content of the welcome prompt', 'chabok-io' ),
+			'forget_all'		=> array(
+				'id'			=> 'forget_all',
+				'name'			=> __( 'Forget saved devices and users', 'chabok-io' ),
+				'type'			=> 'forget_button',
 			),
 		) ),
 	) );
@@ -336,7 +377,7 @@ function chabok_text_callback( $args ) {
 	}
 
 	$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
-	$html = '<input type="text" class="' . $size . '-text" id="chabok_options[' . $args['id'] . ']" name="chabok_options[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
+	$html = '<input type="text" class="' . $size . '-text ' . ( $args['input_class'] ? $args['input_class'] : '' ) . '" id="chabok_options[' . $args['id'] . ']" name="chabok_options[' . $args['id'] . ']" value="' . esc_attr( stripslashes( $value ) ) . '"/>';
 	$html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
 	echo $html;
@@ -364,6 +405,69 @@ function chabok_textarea_callback( $args ) {
 }
 
 /**
+ * Select Callback
+ *
+ * Renders select fields.
+ *
+ * @param array $args Arguments passed by the setting
+ * @return void
+ */
+function chabok_select_callback($args) {
+	global $chabok_options;
+
+	$chabok_option = isset( $chabok_options[ $args['id'] ] ) ? $chabok_options[ $args['id'] ] : null;
+
+	if ( $chabok_option ) {
+		$value = $chabok_option;
+	} else {
+
+		// Properly set default fallback if the Select Field allows Multiple values
+		if ( empty( $args['multiple'] ) ) {
+			$value = isset( $args['std'] ) ? $args['std'] : '';
+		} else {
+			$value = ! empty( $args['std'] ) ? $args['std'] : array();
+		}
+
+	}
+
+	// If the Select Field allows Multiple values, save as an Array
+	$name_attr = 'chabok_options[' . esc_attr( $args['id'] ) . ']';
+	$name_attr = ( $args['multiple'] ) ? $name_attr . '[]' : $name_attr;
+
+	$html = '<select id="chabok_options[' . $args['id'] . ']" name="' . $name_attr . '" class="" ' . ( ( $args['multiple'] ) ? 'multiple="true"' : '' ) . '>';
+
+	foreach ( $args['options'] as $option => $name ) {
+
+		if ( ! $args['multiple'] ) {
+			$selected = selected( $option, $value, false );
+			$html .= '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( $name ) . '</option>';
+		} else {
+			// Do an in_array() check to output selected attribute for Multiple
+			$html .= '<option value="' . esc_attr( $option ) . '" ' . ( ( in_array( $option, $value ) ) ? 'selected="true"' : '' ) . '>' . esc_html( $name ) . '</option>';
+		}
+
+	}
+
+	$html .= '</select>';
+	$html .= '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
+
+	echo $html;
+}
+
+/**
+ * Renders a "forget all" button for certain
+ * situations.
+ *
+ * @return void
+ */
+function chabok_forget_button_callback() {
+	?>
+	<a href="#" class="button"><?php _e( 'Forget all', 'chabok-io' ); ?></a>
+	<p class="description"><?php _e( 'Use this button only for certain situations that you need to clear all devices and their corresponding users IDs from WordPress memory. This is useful for testing and/or debugging.', 'chabok-io' ); ?></p>
+	<?php
+}
+
+/**
  * Rendering callback for malicious options.
  *
  * @param array $args
@@ -384,7 +488,9 @@ function chabok_render_settings() {
 	ob_start();
 	?>
 	<div class="wrap chabok-settings-wrap">
-		<h2><?php _e( 'Chabok Options', 'chabok-io' ) ?></h2>
+		<p style="text-align: center;">
+			<img style="height: 64px;" src="<?php echo CHABOK_URL; ?>/assets/chabok-logo.svg" alt="<?php _e( 'Chabok logo', 'chabok-io' ); ?>">
+		</p>
 		<h2 class="nav-tab-wrapper">
 			<?php
 			foreach ( chabok_get_tabs() as $tab_id => $tab_name ) {
@@ -396,24 +502,36 @@ function chabok_render_settings() {
 
 				$active = $active_tab == $tab_id ? ' nav-tab-active' : '';
 
-				echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $tab_name ) . '" class="nav-tab' . $active . '">';
+				echo '<a href="' . esc_url( $tab_url ) . '" class="nav-tab' . $active . '">';
 				echo $tab_name;
 				echo '</a>';
 			}
 			?>
 		</h2>
-		<?php settings_errors( 'chabok-notices' ); ?>
+		<?php echo settings_errors( 'chabok_options' ); ?>
 		<div id="tab_container">
 			<form method="post" action="options.php">
 				<table class="form-table">
 					<?php
-					settings_fields( 'chabok_options' );
-					do_settings_fields( 'chabok_options_' . $active_tab, 'chabok_options_' . $active_tab );
+						settings_fields( 'chabok_options' );
+						do_settings_fields( 'chabok_options_' . $active_tab, 'chabok_options_' . $active_tab );
 					?>
 				</table>
 				<?php submit_button(); ?>
 			</form>
 		</div><!-- #tab_container-->
+
+		<?php if ( $active_tab === 'advanced' ) { ?>
+			<div class="notice error settings-error">
+				<p>
+					<?php echo sprintf( __( 'You are in <b>Advanced</b> tab. Misconfiguring the options below might cause malfunction or data inconsistency between your website and Chabok. Please proceed with care. You can <a href="%s">contact the support</a> if you are unsure.', 'chabok-io' ), 'https://chabok-io' ); ?>
+				</p>
+			</div>
+		<?php } else { ?>
+			<div class="notice settings-error">
+				<p><?php echo sprintf( __( 'If you are facing problems or having questions about Chabok, you can <a href="%s">call the support</a>.', 'chabok-io' ), 'https://chabok.io' ); ?>
+			</div>
+		<?php } ?>
 	</div><!-- .wrap -->
 	<?php
 	echo ob_get_clean();
