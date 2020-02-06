@@ -48,7 +48,7 @@ function chabok_get_user() {
 function chabok_action_links($links, $file) {
 	if ( $file === plugin_basename( CHABOK_ROOT ) ) {
 		$plugin_links[] = '<a href="' . admin_url( 'admin.php?page=chabok' ) . '">' . __( 'Settings', 'chabok-io' ) . '</a>';
-		$plugin_links[] = '<a target="_blank" href="https://chabok.io/">' . __( 'Support', 'chabok-io' ) . '</a>';
+		$plugin_links[] = '<a target="_blank" href="https://doc.chabok.io/">' . __( 'Documentation', 'chabok-io' ) . '</a>';
 
 		foreach( $plugin_links as $link ) {
 			array_unshift( $links, $link );

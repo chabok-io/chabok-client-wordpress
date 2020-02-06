@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Chabok Integration
  * Version: 0.02.06-alpha
- * Author: Chabok
- * Description: This plugin provides Chabok integration features such as Push notifications and tracking tags.
+ * Author: Chabok Team
+ * Description: This plugin provides Chabok integration features such as Push notifications and tracking.
  * Plugin URI: https://chabok.io/
  * Author URI: https://chabok.io/
  * Text Domain: chabok-io

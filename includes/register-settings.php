@@ -230,7 +230,7 @@ function chabok_get_registered_options() {
 				'name'			=> __( 'API Key', 'chabok-io' ),
 				'type'			=> 'text',
 				'std'			=> '',
-				'desc'			=> sprintf( __( 'You can receive App ID, Web Key and API Key in <a href="%s">your Chabok panel</a>.', 'chabok-io' ), 'https://chabok.io' ),
+				'desc'			=> sprintf( __( 'You can receive App ID, Web Key and API Key in <a href="%s">your Chabok panel &raquo; Settings &raquo; Platforms</a>.', 'chabok-io' ), 'https://chabok.io' ),
 				'input_class'	=> 'code',
 			),
 			'webpush'			=> array(
@@ -249,7 +249,7 @@ function chabok_get_registered_options() {
 				'name'			=> __( 'VAPID Public Key', 'chabok-io' ),
 				'type'			=> 'text',
 				'std'			=> '',
-				'desc'			=> sprintf( __( 'VAPID public key is required when you want to use WebPush. You can receive VAPID public key in <a href="%s">your Chabok panel</a>', 'chabok-io' ), 'https://chabok.io' ),
+				'desc'			=> sprintf( __( 'VAPID public key is required when you want to use WebPush. You can receive VAPID public key in <a href="%s">your Chabok panel &raquo; Settings &raquo; Platforms &raquo; Web &raquo; Config</a>', 'chabok-io' ), 'https://chabok.io' ),
 				'input_class'	=> 'code',
 			),
 			'env'				=> array(
@@ -554,7 +554,7 @@ function chabok_render_settings() {
 		</h2>
 		<?php echo settings_errors( 'chabok_options' ); ?>
 		<?php if ($active_tab === 'tracking') { ?>
-			<p><?php echo sprintf( __( 'You can set up the behaviors you want to be tracked and sent to Chabok. You can use <a href="%s">extensions</a> to add the support of more behaviors.</p>' ), 'https://chabok.io' ); ?>
+			<p><?php echo sprintf( __( 'You can set up the behaviors you want to be tracked and sent to Chabok. You can use <a href="%s">extensions</a> to add the support of more behaviors.', 'chabok-io' ), 'https://chabok.io' ); ?></p>
 		<?php } ?>
 		<div id="tab_container">
 			<form method="post" action="options.php">
