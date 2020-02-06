@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Chabok Integration
- * Version: 0.01.13-alpha
+ * Version: 0.02.06-alpha
  * Author: Chabok
  * Description: This plugin provides Chabok integration features such as Push notifications and tracking tags.
  * Plugin URI: https://chabok.io/
@@ -41,6 +41,11 @@ final class ChabokIO {
 	private static $instance;
 
 	/**
+	 * @var Chabok_API Chabok API instance.
+	 */
+	public $api;
+
+	/**
 	 * Retrieves the main ChabokIO instance.
 	 *
 	 * Insures that only one instance of ChabokIO class exists in memory
@@ -62,6 +67,7 @@ final class ChabokIO {
 			add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ), 1 );
 
 			self::$instance->includes();
+			self::$instance->api = new Chabok_API();
 		}
 
 		return self::$instance;
@@ -110,7 +116,7 @@ final class ChabokIO {
 		}
 
 		if ( ! defined( 'CHABOK_VER' ) ) {
-			define( 'CHABOK_VER', '0.12.21' );
+			define( 'CHABOK_VER', '0.02.06-alpha' );
 		}
 	}
 
@@ -127,9 +133,14 @@ final class ChabokIO {
 		require_once CHABOK_DIR . 'includes/register-settings.php';
 		$chabok_options = chabok_get_options();
 
+		require_once CHABOK_DIR . 'includes/functions.php';
+		require_once CHABOK_DIR . 'includes/class-chabok-api.php';
 		require_once CHABOK_DIR . 'includes/meta-box.php';
 		require_once CHABOK_DIR . 'includes/enqueues.php';
-
+		require_once CHABOK_DIR . 'includes/rewrite.php';
+		require_once CHABOK_DIR . 'includes/attribution.php';
+		require_once CHABOK_DIR . 'includes/tracking.php';
+		require_once CHABOK_DIR . 'includes/user-devices.php';
 	}
 
 	/**

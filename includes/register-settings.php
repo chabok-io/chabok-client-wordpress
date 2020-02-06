@@ -127,7 +127,7 @@ function chabok_get_user_attribute_keys() {
 		array(
 			'ID' => 'ID',
 			'user_login' => __( 'Username', 'chabok-io' ),
-			'email' => __( 'Email', 'chabok-io' ),
+			'user_email' => __( 'Email', 'chabok-io' ),
 		)
 	);
 }
@@ -223,7 +223,14 @@ function chabok_get_registered_options() {
 				'name'			=> __( 'Web Key', 'chabok-io' ),
 				'type'			=> 'text',
 				'std'			=> '',
-				'desc'			=> sprintf( __( 'You can receive App ID and Web Key in <a href="%s">your Chabok panel</a>.', 'chabok-io' ), 'https://chabok.io' ),
+				'input_class'	=> 'code',
+			),
+			'api_key'			=> array(
+				'id'			=> 'api_key',
+				'name'			=> __( 'API Key', 'chabok-io' ),
+				'type'			=> 'text',
+				'std'			=> '',
+				'desc'			=> sprintf( __( 'You can receive App ID, Web Key and API Key in <a href="%s">your Chabok panel</a>.', 'chabok-io' ), 'https://chabok.io' ),
 				'input_class'	=> 'code',
 			),
 			'webpush'			=> array(
@@ -235,7 +242,7 @@ function chabok_get_registered_options() {
 					'on'		=> __( 'On', 'chabok-io' ),
 					'off'		=> __( 'Off', 'chabok-io' ),
 				),
-				'desc'			=> __( 'Turn this option on if you want to send your users real-time push messsages.', 'chabok-io' ),
+				'desc'			=> __( 'Turn this option on if you want to send your users real-time push messages.', 'chabok-io' ),
 			),
 			'vapid'				=> array(
 				'id'			=> 'vapid',
@@ -285,8 +292,43 @@ function chabok_get_registered_options() {
 				'name'			=> __( 'User attribution key', 'chabok-io' ),
 				'type'			=> 'select',
 				'options'		=> chabok_get_user_attribute_keys(),
-				'std'			=> 'email',
+				'std'			=> 'user_email',
 				'desc'			=> __( 'Choose which one of the user attributes should be used for his/her attribution in Chabok.', 'chabok-io' ),
+			),
+		) ),
+		'tracking'				=> apply_filters( 'chabok_tracking_options', array(
+			'track_posts'		=> array(
+				'id'			=> 'track_posts',
+				'name'			=> __( 'Track posts', 'chabok-io' ),
+				'type'			=> 'radio',
+				'options'		=> array(
+					'on'		=> __( 'On', 'chabok-io' ),
+					'off'		=> __( 'Off', 'chabok-io' ),
+				),
+				'std'			=> 'on',
+				'desc'			=> __( 'If enabled, each time a user views a post (in a single page), the behavior details will be sent to Chabok.', 'chabok-io' ),
+			),
+			'track_search'		=> array(
+				'id'			=> 'track_search',
+				'name'			=> __( 'Track searches', 'chabok-io' ),
+				'type'			=> 'radio',
+				'options'		=> array(
+					'on'		=> __( 'On', 'chabok-io' ),
+					'off'		=> __( 'Off', 'chabok-io' ),
+				),
+				'std'			=> 'off',
+				'desc'			=> __( 'You can track search queries, number of results and the clicked result.', 'chabok-io' ),
+			),
+			'track_commenting'	=> array(
+				'id'			=> 'track_commenting',
+				'name'			=> __( 'Track comments', 'chabok-io' ),
+				'type'			=> 'radio',
+				'options'		=> array(
+					'on'		=> __( 'On', 'chabok-io' ),
+					'off'		=> __( 'Off', 'chabok-io' ),
+				),
+				'std'			=> 'off',
+				'desc'			=> __( 'Track users who leave a comment.', 'chabok-io' ),
 			),
 		) ),
 		'advanced'				=> apply_filters( 'chabok_advanced_options', array(
@@ -299,7 +341,7 @@ function chabok_get_registered_options() {
 					'off'		=> __( 'Off', 'chabok-io' ),
 				),
 				'std'			=> 'on',
-				'desc'			=> sprintf( __( 'Turn this option off if you use your web server to rewrite ServiceWorker.js file on your website root. <a href="%s">Learn more</a>', 'chabok-io' ), '#' ),
+				'desc'			=> sprintf( __( 'Turn this option off if you use your web server to rewrite ChabokServiceWorker.js file on your website root. <a href="%s">Learn more</a>', 'chabok-io' ), '#' ),
 			),
 			'forget_all'		=> array(
 				'id'			=> 'forget_all',
@@ -462,8 +504,8 @@ function chabok_select_callback($args) {
  */
 function chabok_forget_button_callback() {
 	?>
-	<a href="#" class="button"><?php _e( 'Forget all', 'chabok-io' ); ?></a>
-	<p class="description"><?php _e( 'Use this button only for certain situations that you need to clear all devices and their corresponding users IDs from WordPress memory. This is useful for testing and/or debugging.', 'chabok-io' ); ?></p>
+	<a href="<?php echo wp_nonce_url( add_query_arg( 'chabok_reset_all', 1 ), 'chabok_reset_all' ); ?>" onclick="return confirm('<?php _e( 'Are you sure? This is irreversible!', 'chabok-io' ); ?>')" class="button"><?php _e( 'Forget all', 'chabok-io' ); ?></a>
+	<p class="description"><?php _e( 'Use this button only for certain situations that you need to clear all devices and their corresponding users IDs from WordPress database. This is useful for testing and/or debugging.', 'chabok-io' ); ?></p>
 	<?php
 }
 
@@ -489,7 +531,9 @@ function chabok_render_settings() {
 	?>
 	<div class="wrap chabok-settings-wrap">
 		<p style="text-align: center;">
-			<img style="height: 64px;" src="<?php echo CHABOK_URL; ?>/assets/chabok-logo.svg" alt="<?php _e( 'Chabok logo', 'chabok-io' ); ?>">
+			<a href="https://chabok.io/" target="_blank">
+				<img style="height: 64px;" src="<?php echo CHABOK_URL; ?>/assets/chabok-logo.svg" alt="<?php _e( 'Chabok logo', 'chabok-io' ); ?>">
+			</a>
 		</p>
 		<h2 class="nav-tab-wrapper">
 			<?php
@@ -509,6 +553,9 @@ function chabok_render_settings() {
 			?>
 		</h2>
 		<?php echo settings_errors( 'chabok_options' ); ?>
+		<?php if ($active_tab === 'tracking') { ?>
+			<p><?php echo sprintf( __( 'You can set up the behaviors you want to be tracked and sent to Chabok. You can use <a href="%s">extensions</a> to add the support of more behaviors.</p>' ), 'https://chabok.io' ); ?>
+		<?php } ?>
 		<div id="tab_container">
 			<form method="post" action="options.php">
 				<table class="form-table">

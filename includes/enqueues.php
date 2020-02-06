@@ -25,7 +25,7 @@ function chabok_enqueue() {
 	wp_register_script(
 		'chabok',
 		CHABOK_URL . 'assets/js/chabok-init.js',
-		array( 'chabokpush' ),
+		array( 'chabokpush', 'jquery' ),
 		CHABOK_VER,
 		true
 	);
@@ -34,7 +34,7 @@ function chabok_enqueue() {
 
 	wp_localize_script( 'chabok', 'chabok_params', array(
 		'options' 		=> $chabok_options,
-		'worker'		=> CHABOK_URL . 'assets/js/ChabokSDKWorker.js',
+		'xhr_endpoint'	=> admin_url( 'admin-ajax.php' ),
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'chabok_enqueue' );
