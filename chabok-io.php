@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Chabok Integration
- * Version: 0.02.06-alpha
+ * Version: 0.02.08-alpha
  * Author: Chabok Team
  * Description: This plugin provides Chabok integration features such as Push notifications and tracking.
  * Plugin URI: https://chabok.io/
@@ -116,7 +116,7 @@ final class ChabokIO {
 		}
 
 		if ( ! defined( 'CHABOK_VER' ) ) {
-			define( 'CHABOK_VER', '0.02.06-alpha' );
+			define( 'CHABOK_VER', '0.02.08-alpha' );
 		}
 	}
 

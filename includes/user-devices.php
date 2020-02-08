@@ -64,10 +64,7 @@ function chabok_reset_devices_for_user() {
 		return;
 	}
 
-	/**
-	 * @todo safe escape
-	 */
-	$user_id = intval( $_GET['chabok_reset'] );
+	$user_id = absint( $_GET['chabok_reset'] );
 	$nonce = sanitize_text_field( $_GET['_wpnonce'] );
 
 	if ( ! wp_verify_nonce( $nonce, 'chabok_reset_' . $user_id ) ) {
@@ -102,9 +99,6 @@ function chabok_reset_all_devices() {
 		return;
 	}
 
-	/**
-	 * @todo safe escape
-	 */
 	$nonce = sanitize_text_field( $_GET['_wpnonce'] );
 
 	if ( ! wp_verify_nonce( $nonce, 'chabok_reset_all' ) ) {
