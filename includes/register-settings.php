@@ -41,12 +41,17 @@ function chabok_get_options() {
 		update_option( 'chabok_options', array(
 			'app_id'			=> '',
 			'web_key'			=> '',
+			'api_key'			=> '',
 			'webpush'			=> 'off',
 			'vapid'				=> '',
 			'env'				=> 'dev',
 			'realtime'			=> 'off',
-			'welcome_enabled'	=> 'off',
-			'welcome_message'	=> '',
+			'register_users'	=> 'off',
+			'user_id_key'		=> 'email',
+			'track_posts'		=> 'off',
+			'track_search'		=> 'off',
+			'track_commenting'	=> 'off',
+			'rewrite_sw'		=> 'on',
 		) );
 	}
 
@@ -275,7 +280,7 @@ function chabok_get_registered_options() {
 				'desc'			=> __( "If it's on, users' online status and activity will be shown on your Chabok panel as soon as it happens.", 'chabok-io' ),
 			),
 		) ),
-		'attribution'			=> apply_filters( 'chabok_tracking_options', array(
+		'attribution'			=> apply_filters( 'chabok_attribution_options', array(
 			'register_users'	=> array(
 				'id'			=> 'register_users',
 				'name'			=> __( 'Register logged-in users', 'chabok-io' ),
@@ -305,7 +310,7 @@ function chabok_get_registered_options() {
 					'on'		=> __( 'On', 'chabok-io' ),
 					'off'		=> __( 'Off', 'chabok-io' ),
 				),
-				'std'			=> 'on',
+				'std'			=> 'off',
 				'desc'			=> __( 'If enabled, each time a user views a post (in a single page), the behavior details will be sent to Chabok.', 'chabok-io' ),
 			),
 			'track_search'		=> array(

@@ -22,7 +22,7 @@ function chabok_devices_list_profile( $user ) {
 	<table class="form-table" role="presentation">
 		<tbody>
 			<tr id="chabokDevicesRow">
-				<th><label for="chabokDevices">Devices (Installations)</label></th>
+				<th><label for="chabokDevices"><?php _e( 'Devices (Installations)', 'chabok-io' ); ?></label></th>
 				<td>
 					<?php
 						$devices = $user->chabok_devices;
@@ -37,7 +37,7 @@ function chabok_devices_list_profile( $user ) {
 				</td>
 			</tr>
 			<tr id="chabokDevicesReset">
-				<th><label for="chabokDevices">Reset</label></th>
+				<th><label for="chabokDevices"><?php _e( 'Reset', 'chabok-io' ); ?></label></th>
 				<td>
 					<a href="<?php echo wp_nonce_url( add_query_arg( array( 'chabok_reset' => $user->ID ) ), 'chabok_reset_' . $user->ID ); ?>" class="button"><?php _e( 'Clear devices', 'chabok-io' ); ?></a>
 					<p class="description"><?php _e( 'This is used mostly for debugging purposes. If you are not sure about it, call Chabok support.', 'chabok-io' ); ?></p>

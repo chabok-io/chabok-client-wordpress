@@ -34,8 +34,9 @@ function chabok_on_comment_post($comment_ID, $comment_approved, $commentdata) {
 		$user_id,
 		$installation_id,
 		apply_filters( 'chabok_on_comment_data', array(
-			'author' => $commentdata['comment_author'],
-			'comment_post_id' => $commentdata['comment_post_ID'],
+			'author' 			=> $commentdata['comment_author'],
+			'comment_post_id' 	=> $commentdata['comment_post_ID'],
+			'comment_post_type' => get_post_type( $commentdata['comment_post_ID'] ),
 		), $comment_ID, $comment_approved, $commentdata )
 	);
 }
@@ -67,11 +68,9 @@ function chabok_on_search($query) {
 			'search',
 			$user_id,
 			$installation_id,
-			apply_filters(
-				'chabok_on_search_data',
-				array( 'query' => $query->query['s'] ),
-				$query
-			)
+			apply_filters( 'chabok_on_search_data', array(
+				'query'			=> $query->query['s'],
+			), $query )
 		);
 	}
 }
@@ -109,15 +108,11 @@ function chabok_on_single($query) {
 			'view_post',
 			$user_id,
 			$installation_id,
-			apply_filters(
-				'chabok_on_single_data',
-				array(
-					'post_ID' => get_the_ID(),
-					'post_type' => get_post_type(),
-					'custom_attribute' => get_post_meta( get_the_ID(), '_chabok_custom_attribute', true )
-				),
-				$query
-			)
+			apply_filters( 'chabok_on_single_data', array(
+				'post_ID'			=> get_the_ID(),
+				'post_type'			=> get_post_type(),
+				'custom_attribute'	=> get_post_meta( get_the_ID(), '_chabok_custom_attribute', true ),
+			), $query )
 		);
 	}
 }

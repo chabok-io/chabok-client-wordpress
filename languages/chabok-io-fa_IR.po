@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-02-06 18:21+0330\n"
-"PO-Revision-Date: 2020-02-06 18:51+0330\n"
+"POT-Creation-Date: 2020-02-13 22:40+0330\n"
+"PO-Revision-Date: 2020-02-13 22:41+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "X-Poedit-KeywordsList: __;_e\n"
@@ -44,51 +44,51 @@ msgstr "بیشتر بدانید"
 msgid "Chabok"
 msgstr "چابک"
 
-#: includes/register-settings.php:112
+#: includes/register-settings.php:117
 #, php-format
 msgid "%s Parameters"
 msgstr "%s پارامترها"
 
-#: includes/register-settings.php:113
+#: includes/register-settings.php:118
 #, php-format
 msgid "%s Attribution"
 msgstr "%s اتریبیوشن"
 
-#: includes/register-settings.php:114
+#: includes/register-settings.php:119
 #, php-format
 msgid "%s Tracking"
 msgstr "%s ترکینگ"
 
-#: includes/register-settings.php:115
+#: includes/register-settings.php:120
 #, php-format
 msgid "%s Advanced"
 msgstr "%s پیشرفته"
 
-#: includes/register-settings.php:129
+#: includes/register-settings.php:134
 msgid "Username"
 msgstr "نام کاربری"
 
-#: includes/register-settings.php:130
+#: includes/register-settings.php:135
 msgid "Email"
 msgstr "ایمیل"
 
-#: includes/register-settings.php:201
+#: includes/register-settings.php:206
 msgid "Settings updated."
 msgstr "تنظیمات ذخیره شدند."
 
-#: includes/register-settings.php:216
+#: includes/register-settings.php:221
 msgid "App ID"
 msgstr "App ID"
 
-#: includes/register-settings.php:223
+#: includes/register-settings.php:228
 msgid "Web Key"
-msgstr "کلید وب"
+msgstr "Web Key"
 
-#: includes/register-settings.php:230
+#: includes/register-settings.php:235
 msgid "API Key"
-msgstr "کلید API"
+msgstr "API Key"
 
-#: includes/register-settings.php:233
+#: includes/register-settings.php:238
 #, php-format
 msgid ""
 "You can receive App ID, Web Key and API Key in <a href=\"%s\">your Chabok "
@@ -97,67 +97,67 @@ msgstr ""
 "شما می‌توانید مشخصات بالا را از <a href=\"%s\">پنل چابک خودتان » تنظیمات » "
 "پلتفرم‌ها</a> دریافت کنید."
 
-#: includes/register-settings.php:238
+#: includes/register-settings.php:243
 msgid "WebPush"
 msgstr "وب‌پوش"
 
-#: includes/register-settings.php:242 includes/register-settings.php:272
-#: includes/register-settings.php:284 includes/register-settings.php:305
-#: includes/register-settings.php:316 includes/register-settings.php:327
-#: includes/register-settings.php:340
+#: includes/register-settings.php:247 includes/register-settings.php:277
+#: includes/register-settings.php:289 includes/register-settings.php:310
+#: includes/register-settings.php:321 includes/register-settings.php:332
+#: includes/register-settings.php:345
 msgid "On"
 msgstr "فعال"
 
-#: includes/register-settings.php:243 includes/register-settings.php:273
-#: includes/register-settings.php:285 includes/register-settings.php:306
-#: includes/register-settings.php:317 includes/register-settings.php:328
-#: includes/register-settings.php:341
+#: includes/register-settings.php:248 includes/register-settings.php:278
+#: includes/register-settings.php:290 includes/register-settings.php:311
+#: includes/register-settings.php:322 includes/register-settings.php:333
+#: includes/register-settings.php:346
 msgid "Off"
 msgstr "غیرفعال"
 
-#: includes/register-settings.php:245
+#: includes/register-settings.php:250
 msgid ""
 "Turn this option on if you want to send your users real-time push messages."
 msgstr ""
 "اگر می‌خواهید به کاربران پوش نوتیفیکیشن لحظه‌ای ارسال کنید، این گزینه را فعال "
 "کنید."
 
-#: includes/register-settings.php:249
+#: includes/register-settings.php:254
 msgid "VAPID Public Key"
-msgstr "کلید عمومی VAPID"
+msgstr "VAPID Public Key"
 
-#: includes/register-settings.php:252
+#: includes/register-settings.php:257
 #, php-format
 msgid ""
 "VAPID public key is required when you want to use WebPush. You can receive "
 "VAPID public key in <a href=\"%s\">your Chabok panel &raquo; Settings &raquo; "
 "Platforms &raquo; Web &raquo; Config</a>"
 msgstr ""
-"اگر می‌خواهید از وب‌پوش استفاده کنید باید کلید عمومی VAPID را هم وارد کنید. شما "
-"می‌توانید کلید عمومی VAPID را از <a href=\"%s\">پنل چابک خودتان » تنظیمات » "
+"اگر می‌خواهید از وب‌پوش استفاده کنید باید ٰٰٰVAPID Public Key را هم وارد کنید. شما "
+"می‌توانید VAPID Public Key را از <a href=\"%s\">پنل چابک خودتان » تنظیمات » "
 "پلتفرم‌ها » وب » تنظیمات</a> دریافت کنید"
 
-#: includes/register-settings.php:257
+#: includes/register-settings.php:262
 msgid "Environment"
 msgstr "محیط اجرا"
 
-#: includes/register-settings.php:261
+#: includes/register-settings.php:266
 msgid "Development"
-msgstr "توسعه"
+msgstr "آزمایشی"
 
-#: includes/register-settings.php:262
+#: includes/register-settings.php:267
 msgid "Production"
 msgstr "عملیاتی"
 
-#: includes/register-settings.php:264
+#: includes/register-settings.php:269
 msgid "Check the \"Production\" option when you are ready to blast off."
 msgstr "گزینه‌ی «عملیاتی» را وقتی فعال کنید که آماده‌ی اجرا در محیط واقعی هستید."
 
-#: includes/register-settings.php:268
+#: includes/register-settings.php:273
 msgid "Real-time usage"
 msgstr "آمار در لحظه"
 
-#: includes/register-settings.php:275
+#: includes/register-settings.php:280
 msgid ""
 "If it's on, users' online status and activity will be shown on your Chabok "
 "panel as soon as it happens."
@@ -165,31 +165,31 @@ msgstr ""
 "اگر فعال باشد، وضعیت آنلاین‌بودن کاربران در پنل چابک شما به صورت آنی نمایش داده "
 "می‌شوند."
 
-#: includes/register-settings.php:281
+#: includes/register-settings.php:286
 msgid "Register logged-in users"
 msgstr "ثبت کاربران وارد‌شده"
 
-#: includes/register-settings.php:288
+#: includes/register-settings.php:293
 msgid ""
 "Turn this on if you want logged-in users to be registered and tracked by "
 "Chabok."
 msgstr "اگر این گزینه فعال باشد، کاربران واردشده در وردپرس توسط چابک ثبت می‌شوند."
 
-#: includes/register-settings.php:292
+#: includes/register-settings.php:297
 msgid "User attribution key"
 msgstr "کلید شناسایی کاربر"
 
-#: includes/register-settings.php:296
+#: includes/register-settings.php:301
 msgid ""
 "Choose which one of the user attributes should be used for his/her attribution "
 "in Chabok."
 msgstr "کلید شناسایی کاربر در چابک را انتخاب کنید."
 
-#: includes/register-settings.php:302
+#: includes/register-settings.php:307
 msgid "Track posts"
 msgstr "ثبت مشاهده‌ی نوشته"
 
-#: includes/register-settings.php:309
+#: includes/register-settings.php:314
 msgid ""
 "If enabled, each time a user views a post (in a single page), the behavior "
 "details will be sent to Chabok."
@@ -197,29 +197,29 @@ msgstr ""
 "اگر فعال باشد، هر زمان که کاربری یک نوشته (به صورت تکی) را می‌بیند، رفتار او در "
 "چابک ثبت می‌شود."
 
-#: includes/register-settings.php:313
+#: includes/register-settings.php:318
 msgid "Track searches"
 msgstr "ثبت جستجوها"
 
-#: includes/register-settings.php:320
+#: includes/register-settings.php:325
 msgid "You can track search queries, number of results and the clicked result."
 msgstr "شما می‌توانید عبارت‌های جستجو‌شده را توسط چابک ثبت کنید."
 
-#: includes/register-settings.php:324
+#: includes/register-settings.php:329
 msgid "Track comments"
 msgstr "ثبت دیدگاه‌ها"
 
-#: includes/register-settings.php:331
+#: includes/register-settings.php:336
 msgid "Track users who leave a comment."
 msgstr ""
 "اگر فعال باشد، برخی جزئیات یک دیدگاه هنگام ارسال آن توسط کاربر به چابک نیز "
 "ارسال می‌شود."
 
-#: includes/register-settings.php:337
+#: includes/register-settings.php:342
 msgid "Rewrite ServiceWorker"
 msgstr "بازنویسی ServiceWorker"
 
-#: includes/register-settings.php:344
+#: includes/register-settings.php:349
 #, php-format
 msgid ""
 "Turn this option off if you use your web server to rewrite ChabokServiceWorker."
@@ -228,19 +228,19 @@ msgstr ""
 "اگر می‌خواهید وب‌سرورتان فایل ChabokServiceWorker.js را در ریشه‌ی وب‌سایت‌تان "
 "بازنویسی کند، این گزینه را غیرفعال کنید. <a href=\"%s\">بیشتر بدانید</a>"
 
-#: includes/register-settings.php:348
+#: includes/register-settings.php:353
 msgid "Forget saved devices and users"
 msgstr "فراموش‌کردن دستگاه‌ها و کاربرهای ثبت‌شده"
 
-#: includes/register-settings.php:507
+#: includes/register-settings.php:512
 msgid "Are you sure? This is irreversible!"
 msgstr "آیا مطمئن هستید؟ این عمل غیرقابل‌بازگشت خواهد بود!"
 
-#: includes/register-settings.php:507
+#: includes/register-settings.php:512
 msgid "Forget all"
 msgstr "فراموش‌کردن همه"
 
-#: includes/register-settings.php:508
+#: includes/register-settings.php:513
 msgid ""
 "Use this button only for certain situations that you need to clear all devices "
 "and their corresponding users IDs from WordPress database. This is useful for "
@@ -250,11 +250,11 @@ msgstr ""
 "چابک را از پایگاه‌داده‌ی وردپرس حذف کنید. این گزینه برای تست‌کردن و یا دیباگ‌کردن "
 "کاربردی است."
 
-#: includes/register-settings.php:535
+#: includes/register-settings.php:540
 msgid "Chabok logo"
 msgstr "لوگوی چابک"
 
-#: includes/register-settings.php:557
+#: includes/register-settings.php:562
 #, php-format
 msgid ""
 "You can set up the behaviors you want to be tracked and sent to Chabok. You "
@@ -264,7 +264,7 @@ msgstr ""
 "کنید. هم‌چنین می‌توانید از <a href=\"%s\">افزونه‌ها</a> نیز برای افزودن رفتارهای "
 "بیشتر استفاده کنید."
 
-#: includes/register-settings.php:574
+#: includes/register-settings.php:579
 #, php-format
 msgid ""
 "You are in <b>Advanced</b> tab. Misconfiguring the options below might cause "
@@ -276,7 +276,7 @@ msgstr ""
 "منجر به ناهماهنگی داده بین وب‌سایت شما و چابک شود. اگر مطمئن نیستید، می‌توانید "
 "با <a href=\"%s\">پشتیبانی چابک</a> تماس بگیرید."
 
-#: includes/register-settings.php:579
+#: includes/register-settings.php:584
 #, php-format
 msgid ""
 "If you are facing problems or having questions about Chabok, you can <a href="
@@ -285,9 +285,17 @@ msgstr ""
 "اگر مشکل یا سؤالی دارید، می‌توانید با <a href=\"%s\">پشتیبانی چابک</a> تماس "
 "بگیرید."
 
+#: includes/user-devices.php:25
+msgid "Devices (Installations)"
+msgstr "دستگاه‌ها (Installations)"
+
 #: includes/user-devices.php:30
 msgid "No devices for this user, yet."
 msgstr "هنوز دستگاهی برای این کاربر ثبت نشده است."
+
+#: includes/user-devices.php:40
+msgid "Reset"
+msgstr "بازنشانی"
 
 #: includes/user-devices.php:42
 msgid "Clear devices"
@@ -301,11 +309,11 @@ msgstr ""
 "از این گزینه معمولاً برای دیباگ‌کردن استفاده می‌شود. اگر مطمئن نیستید، با "
 "پشتیبانی چابک تماس بگیرید."
 
-#: includes/user-devices.php:116
+#: includes/user-devices.php:110
 msgid "Cleared all devices from WordPress database!"
 msgstr "همه‌ی دستگاه‌ها از پایگاه‌داده‌ی وردپرس حذف شدند!"
 
-#: includes/user-devices.php:121
+#: includes/user-devices.php:115
 msgid "There was a problem with resetting devices."
 msgstr "مشکلی هنگام پاک‌کردن دستگاه‌ها پیش آمد."
 

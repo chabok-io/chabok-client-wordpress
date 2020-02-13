@@ -32,6 +32,9 @@ function chabok_register_in_session() {
 
 	if ( $user ) {
 		$devices = $user->get('chabok_devices');
+		if ( ! $devices ) {
+			$devices = [];
+		}
 
 		if ( false === in_array( $device_id, $devices ) ) {
 			$devices[] = $device_id;
