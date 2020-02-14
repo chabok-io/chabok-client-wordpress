@@ -28,11 +28,11 @@ function chabok_push_update( $transient ) {
 		) );
 
 		if ( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 ) {
-			set_transient( 'chabok_upgrade', $remote, 1 );
+			set_transient( 'chabok_upgrade', $remote, 43200 );
 		}
 	}
 
-	if ( $remote ) {
+	if ( $remote && ! is_wp_error( $remote ) ) {
 		$remote = json_decode( $remote['body'] );
 
 		if ( $remote && version_compare( CHABOK_VER, $remote->version, '<' ) && version_compare( $remote->requires, get_bloginfo( 'version' ), '<=' ) ) {
