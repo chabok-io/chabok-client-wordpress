@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Chabok Integration
- * Version: 0.02.14-alpha
+ * Version: 1.0.0-beta
  * Author: Chabok Team
  * Description: This plugin provides Chabok integration features such as Push notifications and tracking.
- * Plugin URI: https://chabok.io/
+ * Plugin URI: https://doc.chabok.io/wordpress/
  * Author URI: https://chabok.io/
  * Text Domain: chabok-io
  * Domain Path: languages
@@ -116,7 +116,7 @@ final class ChabokIO {
 		}
 
 		if ( ! defined( 'CHABOK_VER' ) ) {
-			define( 'CHABOK_VER', '0.02.14-alpha' );
+			define( 'CHABOK_VER', '1.0.0-beta' );
 		}
 	}
 
@@ -141,6 +141,7 @@ final class ChabokIO {
 		require_once CHABOK_DIR . 'includes/attribution.php';
 		require_once CHABOK_DIR . 'includes/tracking.php';
 		require_once CHABOK_DIR . 'includes/user-devices.php';
+		require_once CHABOK_DIR . 'includes/auto-update.php';
 	}
 
 	/**

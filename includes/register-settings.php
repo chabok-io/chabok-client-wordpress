@@ -558,8 +558,8 @@ function chabok_render_settings() {
 			?>
 		</h2>
 		<?php echo settings_errors( 'chabok_options' ); ?>
-		<?php if ($active_tab === 'tracking') { ?>
-			<p><?php echo sprintf( __( 'You can set up the behaviors you want to be tracked and sent to Chabok. You can use <a href="%s">extensions</a> to add the support of more behaviors.', 'chabok-io' ), 'https://chabok.io' ); ?></p>
+		<?php if ( $active_tab === 'tracking' ) { ?>
+			<p><?php echo sprintf( __( 'You can set up the behaviors you want to be tracked and sent to Chabok. You can use <a href="%s">extensions</a> to add the support of more behaviors.', 'chabok-io' ), 'https://doc.chabok.io/wordpress/extensions.html' ); ?></p>
 		<?php } ?>
 		<div id="tab_container">
 			<form method="post" action="options.php">
@@ -576,12 +576,12 @@ function chabok_render_settings() {
 		<?php if ( $active_tab === 'advanced' ) { ?>
 			<div class="notice error settings-error">
 				<p>
-					<?php echo sprintf( __( 'You are in <b>Advanced</b> tab. Misconfiguring the options below might cause malfunction or data inconsistency between your website and Chabok. Please proceed with care. You can <a href="%s">contact the support</a> if you are unsure.', 'chabok-io' ), 'https://chabok-io' ); ?>
+					<?php echo sprintf( __( 'You are in <b>Advanced</b> tab. Misconfiguring the options below might cause malfunction or data inconsistency between your website and Chabok. Please proceed with care. You can <a href="%s">contact the support</a> if you are unsure.', 'chabok-io' ), 'https://chabok.io/contact.html' ); ?>
 				</p>
 			</div>
 		<?php } else { ?>
 			<div class="notice settings-error">
-				<p><?php echo sprintf( __( 'If you are facing problems or having questions about Chabok, you can <a href="%s">call the support</a>.', 'chabok-io' ), 'https://chabok.io' ); ?>
+				<p><?php echo sprintf( __( 'If you are facing problems or having questions about Chabok, you can <a href="%s">call the support</a>.', 'chabok-io' ), 'https://chabok.io/contact.html' ); ?>
 			</div>
 		<?php } ?>
 	</div><!-- .wrap -->
