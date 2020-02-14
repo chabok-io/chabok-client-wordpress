@@ -346,7 +346,7 @@ function chabok_get_registered_options() {
 					'off'		=> __( 'Off', 'chabok-io' ),
 				),
 				'std'			=> 'on',
-				'desc'			=> sprintf( __( 'Turn this option off if you use your web server to rewrite ChabokServiceWorker.js file on your website root. <a href="%s">Learn more</a>', 'chabok-io' ), '#' ),
+				'desc'			=> sprintf( __( 'Turn this option off if you use your web server to rewrite ChabokSDKWorker.js file on your website root. <a href="%s">Learn more</a>', 'chabok-io' ), '#' ),
 			),
 			'forget_all'		=> array(
 				'id'			=> 'forget_all',
