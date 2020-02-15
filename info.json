@@ -1,0 +1,6 @@
+{
+  "version": "1.0.0-beta",
+  "tested": "5.3.2",
+  "requires": "5.0",
+  "package": "https://github.com/chabok-io/chabok-client-wordpress/archive/master.zip"
+}
