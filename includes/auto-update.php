@@ -20,7 +20,7 @@ function chabok_push_update( $transient ) {
 	}
 
 	if ( false == $remote = get_transient( 'chabok_upgrade' ) ) {
-		$remote = wp_remote_get( 'https://raw.githubusercontent.com/chabok-io/chabok-wordpress-plugin/master/info.json', array(
+		$remote = wp_remote_get( 'https://raw.githubusercontent.com/chabok-io/chabok-client-wordpress/master/info.json', array(
 			'timeout'		=> 10,
 			'headers'		=> array(
 				'Accept'	=> 'application/json',
